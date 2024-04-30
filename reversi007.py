@@ -273,7 +273,7 @@ class Battle:
         self.blacklog.normalize(n)
         self.blacklog.print_total()
         self.blacklog.save()
-        print ('white : ',self.whitecount,' black : ',self.blackcount,' draw : ',self.drawcount)
+        print ('black : ',self.blackcount,' white : ',self.whitecount,' draw : ',self.drawcount)
 
     def battle(self):
         self.board = Board()
