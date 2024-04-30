@@ -1,3 +1,4 @@
+import sys
 import random
 import numpy as np
 import datetime as dt
@@ -47,7 +48,7 @@ class Board:
         for x in range(8):
             w= w+ self.board[x].count(self.WHITE)
             b= b+ self.board[x].count(self.BLACK)
-        print('Black:',b,'White:',w)
+        print('White:',w,'Black:',b)
         if w == b:
             print('Draw')
         elif w > b:
@@ -278,8 +279,9 @@ class Battle:
     def battle(self):
         self.board = Board()
 
-        w = RandomChoicePlayer(self.board.WHITE)
-        b = RandomChoicePlayer(self.board.BLACK)
+        w = RandomChoicePlayer(self.board.BLACK)
+        b = PointChoicePlayer(self.board.WHITE)
+        b.load('20240501-061005-black.npy')
 
         self.whitelog.reset_log()
         self.blacklog.reset_log()
@@ -364,6 +366,33 @@ class RandomChoicePlayer(Player):
         else:
             return None
 
+
+class PointChoicePlayer(Player):
+
+    point_data = None
+
+    def __init__(self,own_color) -> None:
+        super().__init__(own_color)
+
+    def next(self,currentboard):
+        c = currentboard.candidate(self.own_color)
+        l = len(c)
+        if l == 0:
+            return None
+        data_list = list()
+        for d in range(l):
+            x,y = c[d]
+            data_list.append((c[d],self.point_data[x][y]))
+        max_point = -sys.float_info.max
+        max_position = 0,0
+        for d in range(l):
+            if max_point < data_list[d][1]:
+                max_point = data_list[d][1]
+                max_position = data_list[d][0]
+        return max_position
+
+    def load(self,filename):
+        self.point_data = np.load(filename)
 class InputPlayer(Player):
 
     def __init__(self,own_color):
@@ -431,3 +460,4 @@ class Tracelog:
 
 battle = Battle()
 battle.continuous_battle(100000)
+
