@@ -256,7 +256,7 @@ class Battle:
     def battle(self):
         w = FirstChoicePlayer(self.board.WHITE)
         b = RandomChoicePlayer(self.board.BLACK)
-        current_color = self.board.WHITE
+        current_color = self.board.BLACK
         C = self.board.candidate(current_color)
         while True:
             self.board.printboard()
