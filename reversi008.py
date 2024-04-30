@@ -279,8 +279,8 @@ class Battle:
     def battle(self):
         self.board = Board()
 
-        w = RandomChoicePlayer(self.board.BLACK)
-        b = PointChoicePlayer(self.board.WHITE)
+        w = RandomChoicePlayer(self.board.WHITE)
+        b = PointChoicePlayer(self.board.BLACK)
         b.load('20240501-061005-black.npy')
 
         self.whitelog.reset_log()
