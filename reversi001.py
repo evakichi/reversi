@@ -34,7 +34,7 @@ def printboard():
         print('|')
 
 def isavailable(x,y,color):
-    if board[x][y] != EMPTY:
+    if x < 0 or x > 7 or y < 0 or y > 7 or board[x][y] != EMPTY:
         return False
 
 ### →方向の検索

@@ -55,7 +55,7 @@ class Board:
         return w,b
 
     def isavailable(self,x,y,color):
-        if self.board[x][y] != self.EMPTY:
+        if x < 0 or x > 7 or y < 0 or y > 7 or self.board[x][y] != self.EMPTY:
             return False
 
     ### →方向の検索
