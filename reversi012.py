@@ -280,10 +280,10 @@ class Battle:
     def battle(self,queue):
         board = Board()
 
-        w = MiniMaxPlayer(board.WHITE)
+        w = RandomChoicePlayer(board.WHITE)
         b = RandomChoicePlayer(board.BLACK)
 
-        w.load("20240519-200300-black-1000000.npy","20240519-200300-white-1000000.npy")
+        #w.load("20240519-200300-black-1000000.npy","20240519-200300-white-1000000.npy")
 
         blacklog = np.zeros((8,8))
         whitelog = np.zeros((8,8))
@@ -617,4 +617,4 @@ class Tracelog:
         np.save(dt.datetime.now().strftime('%Y%m%d-%H%M%S')+'-'+self.color,self.total)
 
 battle = MultipleBattle()
-battle.continuous_battle(20,20)
+battle.continuous_battle(10000000,20)
